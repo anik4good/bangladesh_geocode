@@ -1,3 +1,4 @@
+
 # GeoAPIBD
 
 **GeoAPIBD** is a RESTful API built with Go, providing structured geographical data for Bangladesh, including divisions, districts, upazilas, and unions. The API is designed to facilitate quick and easy access to location-based data for various applications and services.
@@ -63,7 +64,7 @@ To set up the project locally, follow these steps:
 
 ```bash
 # Clone the repository
-git clone https://github.com/anik4good/bangladesh_geocode.git
+git clone https://github.com/anik4good/geoapibd.git
 
 # Change into the project directory
 cd geoapibd
@@ -73,31 +74,50 @@ go mod tidy
 
 # Run the application
 go run main.go
+```
 
+---
 
+## 🔧 Environment Variables
 
- Environment Variables
 The application relies on environment variables for configuration. Set the following variable:
 
-SERVER_URL: Base URL for the API.
-Example:
+- `SERVER_URL`: Base URL for the API.
 
-bash
-Copy code
+Example:
+```bash
 export SERVER_URL=https://bdgeo.root2tech.com
-🛠️ Usage
-Once the server is running, you can test the API using curl, Postman, or similar tools.
+```
+
+---
+
+## 🛠️ Usage
+
+Once the server is running, you can test the API using **curl**, **Postman**, or similar tools.
 
 Example request to retrieve all divisions:
-
-bash
-Copy code
+```bash
 curl https://bdgeo.root2tech.com/api/divisions
-📜 License
-This project is licensed under the MIT License. For more details, see the LICENSE file in the repository.
+```
 
-🤝 Contributing
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. For more details, see the [LICENSE](LICENSE) file in the repository.
+
+---
+
+## 🤝 Contributing
+
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
 
-📞 Contact
+---
+
+## 📞 Contact
+
 For any inquiries, please reach out to [your email or contact information here].
+
+---
+
+**GeoAPIBD** - Built with ❤️ and Go
