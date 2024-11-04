@@ -1,0 +1,74 @@
+<h1>GeoAPIBD</h1>
+
+<p>GeoAPIBD is a RESTful API developed with Go, designed to provide geographical information for Bangladesh, including divisions, districts, upazilas, and unions. This API allows users to retrieve data at various levels of granularity.</p>
+
+<h2>Table of Contents</h2>
+<ul>
+  <li><a href="#features">Features</a></li>
+  <li><a href="#endpoints">Endpoints</a></li>
+  <li><a href="#setup">Setup</a></li>
+  <li><a href="#environment-variables">Environment Variables</a></li>
+  <li><a href="#usage">Usage</a></li>
+  <li><a href="#license">License</a></li>
+</ul>
+
+<h2 id="features">Features</h2>
+<ul>
+  <li>Provides endpoints for retrieving data on divisions, districts, upazilas, and unions.</li>
+  <li>Developed with <strong>Go</strong> and <strong>Echo</strong> framework for high performance and simplicity.</li>
+  <li>Offers dynamic URL generation based on environment variables.</li>
+</ul>
+
+<h2 id="endpoints">Endpoints</h2>
+<p>Below are the primary endpoints available in the API:</p>
+<ul>
+  <li><code>GET /api/divisions</code> - Retrieve all divisions.</li>
+  <li><code>GET /api/districts</code> - Retrieve all districts.</li>
+  <li><code>GET /api/division/{division_name}</code> - Retrieve a specific division by name.</li>
+  <li><code>GET /api/division/{division_name}/districts</code> - Retrieve districts within a division.</li>
+  <li><code>GET /api/division/{division_name}/upazilas</code> - Retrieve upazilas within a division.</li>
+  <li><code>GET /api/division/{division_name}/district/{district_name}/upazilas</code> - Retrieve upazilas within a district.</li>
+  <li><code>GET /api/division/{division_name}/district/{district_name}/upazila/{upazila_name}/unions</code> - Retrieve unions within an upazila.</li>
+</ul>
+
+<h2 id="setup">Setup</h2>
+<p>To set up the project locally, follow these steps:</p>
+<pre>
+<code>
+# Clone the repository
+git clone https://github.com/anik4good/bangladesh_geocode.git
+
+# Change into the project directory
+cd geoapibd
+
+# Install dependencies
+go mod tidy
+
+# Run the application
+go run main.go
+</code>
+</pre>
+
+<h2 id="environment-variables">Environment Variables</h2>
+<p>The application requires the following environment variables:</p>
+<ul>
+  <li><code>SERVER_URL</code>: The base URL for the API.</li>
+</ul>
+<p>Example:</p>
+<pre>
+<code>
+export SERVER_URL=https://bdgeo.root2tech.com
+</code>
+</pre>
+
+<h2 id="usage">Usage</h2>
+<p>Once the server is running, you can use tools like <strong>curl</strong> or <strong>Postman</strong> to test the endpoints.</p>
+<pre>
+<code>
+# Example request to get all divisions
+curl https://bdgeo.root2tech.com/api/divisions
+</code>
+</pre>
+
+<h2 id="license">License</h2>
+<p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for details.</p>
