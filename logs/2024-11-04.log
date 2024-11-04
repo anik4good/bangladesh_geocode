@@ -1,0 +1,19 @@
+2024/11/04 14:37:15 bangladesh_geocode:BeXssnwhN8nt5a5H@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2024/11/04 14:37:15 Failed to connect to database. 
+Error 1045: Access denied for user 'bangladesh_geocode'@'localhost' (using password: YES)
+2024/11/04 14:37:43 bangladesh_geocode:BeXssnwhN8nt5a5H@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2024/11/04 14:37:43 Failed to connect to database. 
+Error 1045: Access denied for user 'bangladesh_geocode'@'localhost' (using password: YES)
+2024/11/04 14:38:14 bangladesh_geocode:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2024/11/04 14:38:14 Failed to connect to database. 
+Error 1045: Access denied for user 'bangladesh_geocode'@'localhost' (using password: NO)
+2024/11/04 14:38:32 root:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2024/11/04 14:38:32 connected
+2024/11/04 14:41:22 root:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2024/11/04 14:41:22 connected
+2024/11/04 14:50:04 root:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2024/11/04 14:50:04 connected
+2024/11/04 14:50:54 root:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2024/11/04 14:50:54 connected
+2024/11/04 14:51:09 root:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2024/11/04 14:51:09 connected

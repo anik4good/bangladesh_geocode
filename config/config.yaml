@@ -1,0 +1,5 @@
+Mysqlconnstring: "root:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local"
+Server_port: "1552"
+
+
+
