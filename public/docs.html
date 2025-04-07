@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoAPIBD API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #333;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        code {
+            color: #d63384;
+        }
+
+        .endpoint {
+            margin-bottom: 30px;
+        }
+
+        .response {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>GeoAPIBD API Documentation</h1>
+    <p>This document provides an overview of the APIs implemented in the <code>controllers</code> package. Each endpoint
+        is described with its HTTP method, URL, input parameters, and the response format.</p>
+
+    <hr>
+
+    <div class="endpoint">
+        <h2>1. Hello Endpoint</h2>
+        <p><strong>Description</strong>: Provides basic information about the API and available endpoints.</p>
+        <p><strong>HTTP Method</strong>: GET</p>
+        <p><strong>URL</strong>: <code>/api/hello</code></p>
+        <div class="response">
+            <p><strong>Response</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Name": "Welcome to GeoAPIBD. Powered by GO, Developed by Anik",
+    "Divisions": "&lt;SERVER_URL&gt;/api/divisions",
+    "Districts": "&lt;SERVER_URL&gt;/api/districts",
+    "District": "&lt;SERVER_URL&gt;/api/division/rangpur",
+    "Upozilla": "&lt;SERVER_URL&gt;/api/division/rangpur/panchagarh",
+    "Unions": "&lt;SERVER_URL&gt;/api/division/rangpur/panchagarh/debiganj"
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>2. Get All Divisions</h2>
+        <p><strong>Description</strong>: Retrieves all divisions from the database.</p>
+        <p><strong>HTTP Method</strong>: GET</p>
+        <p><strong>URL</strong>: <code>/api/divisions</code></p>
+        <div class="response">
+            <p><strong>Response (on success)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "ALL Divisions",
+    "Time": "2025-01-25 10:30:00",
+    "Data": [
+        {
+            "ID": 1,
+            "Name": "Division Name",
+            "...": "Other Fields"
+        }
+    ]
+}</code></pre>
+            <p><strong>Response (on failure)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "No Data Found",
+    "Time": "2025-01-25 10:30:00"
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>3. Get Division by ID</h2>
+        <p><strong>Description</strong>: Fetches a specific division by its ID.</p>
+        <p><strong>HTTP Method</strong>: GET</p>
+        <p><strong>URL</strong>: <code>/api/divisions/:id</code></p>
+        <p><strong>Path Parameter</strong>:</p>
+        <ul>
+            <li><code>id</code> (string): ID of the division.</li>
+        </ul>
+        <div class="response">
+            <p><strong>Response (on success)</strong>:</p>
+            <pre><code>{
+    "ID": 1,
+    "Name": "Division Name",
+    "...": "Other Fields"
+}</code></pre>
+            <p><strong>Response (on failure)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "No Data Found",
+    "Time": "2025-01-25 10:30:00"
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>4. Get All Districts</h2>
+        <p><strong>Description</strong>: Retrieves all districts from the database.</p>
+        <p><strong>HTTP Method</strong>: GET</p>
+        <p><strong>URL</strong>: <code>/api/districts</code></p>
+        <div class="response">
+            <p><strong>Response (on success)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "ALL Districts",
+    "Time": "2025-01-25 10:30:00",
+    "Data": [
+        {
+            "ID": 1,
+            "Name": "District Name",
+            "...": "Other Fields"
+        }
+    ]
+}</code></pre>
+            <p><strong>Response (on failure)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "No Data Found",
+    "Time": "2025-01-25 10:30:00"
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>5. Get Districts by Division Name</h2>
+        <p><strong>Description</strong>: Fetches all districts under a specific division.</p>
+        <p><strong>HTTP Method</strong>: GET</p>
+        <p><strong>URL</strong>: <code>/api/divisions/:division_name/districts</code></p>
+        <p><strong>Path Parameter</strong>:</p>
+        <ul>
+            <li><code>division_name</code> (string): Name of the division.</li>
+        </ul>
+        <div class="response">
+            <p><strong>Response (on success)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "ALL Districts Under &lt;Division Name&gt;",
+    "Time": "2025-01-25 10:30:00",
+    "Data": [
+        {
+            "ID": 1,
+            "Name": "District Name",
+            "...": "Other Fields"
+        }
+    ]
+}</code></pre>
+            <p><strong>Response (on failure)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "No Division Found",
+    "Time": "2025-01-25 10:30:00"
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>6. Get Upazilas by District Name</h2>
+        <p><strong>Description</strong>: Fetches all upazilas under a specific district.</p>
+        <p><strong>HTTP Method</strong>: GET</p>
+        <p><strong>URL</strong>: <code>/api/districts/:district_name/upazilas</code></p>
+        <p><strong>Path Parameter</strong>:</p>
+        <ul>
+            <li><code>district_name</code> (string): Name of the district.</li>
+        </ul>
+        <div class="response">
+            <p><strong>Response (on success)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "ALL Upazilas Under &lt;District Name&gt;",
+    "Time": "2025-01-25 10:30:00",
+    "Data": [
+        {
+            "ID": 1,
+            "Name": "Upazila Name",
+            "...": "Other Fields"
+        }
+    ]
+}</code></pre>
+            <p><strong>Response (on failure)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "No District Found",
+    "Time": "2025-01-25 10:30:00"
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>7. Get Unions by Upazila Name</h2>
+        <p><strong>Description</strong>: Fetches all unions under a specific upazila.</p>
+        <p><strong>HTTP Method</strong>: GET</p>
+        <p><strong>URL</strong>: <code>/api/upazilas/:upazila_name/unions</code></p>
+        <p><strong>Path Parameter</strong>:</p>
+        <ul>
+            <li><code>upazila_name</code> (string): Name of the upazila.</li>
+        </ul>
+        <div class="response">
+            <p><strong>Response (on success)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "ALL Unions Under &lt;Upazila Name&gt;",
+    "Time": "2025-01-25 10:30:00",
+    "Data": [
+        {
+            "ID": 1,
+            "Name": "Union Name",
+            "...": "Other Fields"
+        }
+    ]
+}</code></pre>
+            <p><strong>Response (on failure)</strong>:</p>
+            <pre><code>{
+    "Status": true,
+    "Message": "No Upazila Found",
+    "Time": "2025-01-25 10:30:00"
+}</code></pre>
+        </div>
+    </div>
+
+    <hr>
+
+
+</body>
+
+</html>
