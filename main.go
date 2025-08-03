@@ -19,16 +19,16 @@ func main() {
 	Configuration.Init()
 
 	e := echo.New()
-	
+
 	// Add metrics middleware
 	e.Use(middleware.MetricsMiddleware)
-	
+
 	// Add metrics endpoint
 	e.GET("/metrics", echo.WrapHandler(promhttp.Handler()))
-	
+
 	routes.ConfigureRoutes(e)
 	//log.Println(Configuration.Conf.Mysqlconnstring)
-
+	println("Server is running on port:", os.Getenv("SERVER_PORT"))
 	if err := e.Start(":" + os.Getenv("SERVER_PORT")); err != nil {
 		log.Fatalln(err)
 	}
