@@ -8,8 +8,24 @@ services:
     env_file:
       - .env
     ports:
-      - "1552:1552"
+      - "8112:1552"
     restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bangladesh_geocode
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '33061:3306'
+    volumes:
+      - ./db-data:/var/lib/mysql
 
   prometheus:
     image: prom/prometheus
@@ -31,3 +47,4 @@ services:
 
 volumes:
   grafana-storage:
+  db-data:
