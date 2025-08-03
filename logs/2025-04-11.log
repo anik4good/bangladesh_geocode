@@ -1,0 +1,5 @@
+2025/04/11 22:30:37 root:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2025/04/11 22:30:37 Failed to connect to database. 
+dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it.
+2025/04/11 22:30:55 root:@tcp(127.0.0.1:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+2025/04/11 22:30:55 connected
