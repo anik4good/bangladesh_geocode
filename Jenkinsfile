@@ -13,13 +13,6 @@ pipeline {
             }
         }
 
-        stage('Build Go Binary') {
-            steps {
-                sh 'go mod tidy'
-                sh 'go build -o app'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $IMAGE_NAME:latest .'
