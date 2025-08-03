@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  app:
+    image: anik4good/bangladesh_geocode:latest
+    environment:
+      - CONNECTION=user:password@tcp(db:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
+      - SERVER_PORT=1552
+      - SERVER_URL=http://localhost:1552
+    ports:
+      - "8112:1552"
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bangladesh_geocode
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '33061:3306'
+    volumes:
+      - ./db-data:/var/lib/mysql
+
+volumes:
+  db-

@@ -2,38 +2,46 @@ pipeline {
     agent any
 
     environment {
-        COMPOSE_FILE = 'docker-compose.yml'
+        IMAGE_NAME = "anik4good/bangladesh_geocode"
+        DOCKER_CREDENTIALS_ID = "docker-hub-credentials"
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                checkout scm
+                git 'https://github.com/anik4good/bangladesh_geocode.git'
             }
         }
 
-        stage('Build & Deploy') {
+        stage('Build Go Binary') {
             steps {
-                script {
-                    // Stop existing containers
-                    sh 'docker-compose down || true'
+                sh 'go mod tidy'
+                sh 'go build -o app'
+            }
+        }
 
-                    // Pull latest images (optional)
-                    sh 'docker-compose pull || true'
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME:latest .'
+            }
+        }
 
-                    // Rebuild and start in detached mode
-                    sh 'docker-compose up --build -d'
+        stage('Login to Docker Hub & Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh """
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker push $IMAGE_NAME:latest
+                        docker logout
+                    """
                 }
             }
         }
     }
 
     post {
-        success {
-            echo '✅ Deployment successful.'
-        }
-        failure {
-            echo '❌ Deployment failed.'
+        always {
+            cleanWs()
         }
     }
 }
