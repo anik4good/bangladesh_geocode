@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 RUN go build -o bangladesh_geocode
 
-# Final minimal images
+# Final minimal image
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/bangladesh_geocode .
