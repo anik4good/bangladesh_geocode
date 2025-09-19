@@ -58,7 +58,7 @@ pipeline {
                         echo "📦 Pods after deploy:"
                         kubectl get pods -n default -l io.kompose.service=app -o wide
 
-                        echo "🌐 Testing API inside cluster..."
+                        echo "🌐 Testing API inside cluster...."
                         kubectl run curl-test --rm -i --restart=Never --image=curlimages/curl:latest -n default \
                           -- curl -s http://app:1552/api/divisions | head -n 5
                     """
