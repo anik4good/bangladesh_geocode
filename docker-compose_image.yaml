@@ -9,9 +9,9 @@ services:
       - SERVER_URL=http://localhost:1552
     ports:
       - "8112:1552"
-    restart: unless-stopped
+    restart: always
     volumes:
-      - ./logs:/app/logs
+      - logs:/app/logs
     depends_on:
       - db
 
@@ -25,7 +25,8 @@ services:
     ports:
       - '33061:3306'
     volumes:
-      - ./db-data:/var/lib/mysql
+      - db-data:/var/lib/mysql
 
 volumes:
-  db-
+  db-data:
+  logs:

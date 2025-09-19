@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  labels:
+    io.kompose.service: app
+spec:
+  type: NodePort
+  selector:
+    io.kompose.service: app
+  ports:
+  - name: http
+    port: 1552 # Service port inside cluster
+    targetPort: 1552 # Container port
+    nodePort: 30080 # External port (NodePort range 30000–32767)

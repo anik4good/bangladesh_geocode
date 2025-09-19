@@ -42,6 +42,19 @@ pipeline {
         }
     }
 
+     tage('Deploy to K3s') {
+            steps {
+                withCredentials([file(credentialsId: 'k3s-kubeconfig', variable: 'KUBECONFIG_FILE')]) {
+                    sh """
+                        export KUBECONFIG=$KUBECONFIG_FILE
+                        # Apply everything in k3s_deploy
+                        kubectl apply -f k3s_deploy/ -n default
+                        # Force pods to refresh latest image
+                        kubectl rollout restart deployment app -n default
+                    """
+                }
+            }
+
     post {
         always {
             cleanWs()

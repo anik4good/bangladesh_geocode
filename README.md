@@ -181,6 +181,156 @@ curl https://bdgeo.root2tech.com/api/divisions
 
 ---
 
+
+Got it ✅ I’ll extend your README to include **K3s (Kubernetes)** deployment instructions right after the Docker Compose section. I’ll keep it consistent with your style and add an example manifest + `kompose` usage. Here’s the updated part:
+
+---
+
+## 🚀 K3s Deployment Option 1
+
+You can also deploy **GeoAPIBD** on a lightweight Kubernetes cluster such as **K3s**.
+
+### 1. Generate Kubernetes Manifests from Docker Compose
+
+If you already have the `docker-compose.yaml`, you can convert it to Kubernetes YAMLs using **kompose**:
+
+```bash
+kompose convert -f docker-compose.yaml -o k3s_deploy/
+```
+
+This will generate Kubernetes manifests (Deployments, Services, PVCs) inside the `k3s_deploy/` directory.
+
+### 2. Apply the Manifests on K3s
+
+```powershell
+kubectl apply -f k3s_deploy/
+deployment.apps/app created
+service/app created
+persistentvolumeclaim/db-data created
+deployment.apps/db created
+service/db created
+persistentvolumeclaim/logs created
+PS C:\Users\anik\Desktop\GO\bangladesh_geocode> k get pods
+NAME                   READY   STATUS    RESTARTS   AGE
+app-6997c7d995-8brs2   0/1     Pending   0          7s
+db-689886f96-hz6rk     0/1     Pending   0          7s
+PS C:\Users\anik\Desktop\GO\bangladesh_geocode> k get pods
+NAME                   READY   STATUS         RESTARTS   AGE
+app-6997c7d995-8brs2   1/1     Running        0          29s
+db-689886f96-hz6rk     0/1     Running   0          29s
+
+
+```
+
+
+## 🚀 K3s Deployment Option 2
+
+All required Kubernetes manifests are already available inside the [`k3s_deploy/`](./k3s_deploy) folder.
+
+---
+
+## 🚀 Deployment Steps
+
+1. **Apply all manifests**
+```sh
+   kubectl apply -f k3s_deploy/
+```
+
+2. **Verify deployments & services**
+```sh
+   kubectl get pods
+   kubectl get svc
+```
+
+---
+
+## 🔑 Image Pull Secrets (if using private registry)
+
+If your Docker image (`anik4good/bangladesh_geocode:latest`) is private, create a secret:
+
+```sh
+kubectl create secret docker-registry regcred \
+  --docker-server=docker.io \
+  --docker-username=<your-docker-username> \
+  --docker-password=<your-docker-password> \
+  --docker-email=<your-email>
+```
+
+Then patch `app-deployment.yaml` to include:
+
+```yaml
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+      - name: regcred
+```
+
+If your image is **public**, you can skip this step.
+
+---
+
+## 🌍 Access the Application
+
+The app is exposed via **NodePort** (`30080`):
+
+```sh
+kubectl get svc app
+```
+
+Example output:
+
+```
+NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+app    NodePort   10.43.114.105   <none>        1552:30080/TCP   5m
+```
+
+Now you can access it from any K3s node:
+
+```sh
+curl http://<node-ip>:30080/api/divisions
+```
+
+Example:
+
+```sh
+curl http://192.168.100.162:30080/api/divisions
+```
+
+---
+
+## 🛠 Debugging
+
+* Check logs:
+
+  ```sh
+  kubectl logs deploy/app
+  ```
+* Shell into pod:
+
+  ```sh
+  kubectl exec -it deploy/app -- sh
+  ```
+* Inspect service:
+
+  ```sh
+  kubectl describe svc app
+  ```
+
+---
+
+## 🧹 Cleanup
+
+To remove everything:
+
+```sh
+kubectl delete -f k3s_deploy/
+```
+
+
+
+
+
 ## 📜 License
 
 This project is licensed under the MIT License. For more details, see the [LICENSE](LICENSE) file in the repository.
