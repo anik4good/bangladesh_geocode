@@ -32,6 +32,7 @@ spec:
         #   value: http://0.0.0.0:1552
         image: anik4good/bangladesh_geocode:latest
         name: app
+        imagePullPolicy: Always
         ports:
         - containerPort: 1552
           protocol: TCP

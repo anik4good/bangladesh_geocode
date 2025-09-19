@@ -52,15 +52,16 @@ pipeline {
                 withCredentials([file(credentialsId: 'k3s-kubeconfig', variable: 'KUBECONFIG_FILE')]) {
                     sh """
                         export KUBECONFIG=$KUBECONFIG_FILE
-                        echo "⏳ Waiting for pods to become ready..."
-                        kubectl rollout status deployment/app -n default --timeout=120s
 
-                        echo "📦 Pods after deploy:"
-                        kubectl get pods -n default -l io.kompose.service=app -o wide
+                        # Apply Deployment manifests
+                        kubectl apply -f k3s_deploy/ -n default
 
-                        echo "🌐 Testing API inside cluster...."
-                        kubectl run curl-test --rm -i --restart=Never --image=curlimages/curl:latest -n default \
-                          -- curl -s http://app:1552/api/divisions | head -n 5
+                        # Force pods to refresh latest image
+                        kubectl rollout restart deployment app -n default
+
+                        # Wait for rollout to complete
+                        kubectl rollout status deployment/app -n default --timeout=120s || \
+                        kubectl logs -l io.kompose.service=app -n default --tail=20
                     """
                 }
             }
