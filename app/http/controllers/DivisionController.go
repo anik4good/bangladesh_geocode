@@ -45,7 +45,7 @@ func Hello(c echo.Context) error {
 
 	return writePrettyJSON(c, 200, KeyValuePair{
 		Status:        true,
-		Name:          "Welcome to GeoAPIBD. Powered by GO, Developed by Anik",
+		Name:          "Welcome to GeoAPIBD. Powered by GO, Developed by Anik Deployed in K8s",
 		Divisions:     os.Getenv("SERVER_URL") + "/api/divisions",
 		Districts:     os.Getenv("SERVER_URL") + "/api/districts",
 		District:      os.Getenv("SERVER_URL") + "/api/division/rangpur",
