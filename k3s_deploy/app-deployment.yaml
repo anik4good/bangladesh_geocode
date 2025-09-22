@@ -37,8 +37,8 @@ spec:
         - containerPort: 1552
           protocol: TCP
         volumeMounts:
-        - mountPath: /app/logs
-          name: logs
+        - name: logs
+          mountPath: /app/logs
       restartPolicy: Always
       volumes:
       - name: logs
