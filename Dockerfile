@@ -9,8 +9,8 @@ RUN go build -o bangladesh_geocode
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/bangladesh_geocode .
-# COPY .env .env
 
+RUN mkdir logs
 # Set environment variables if needed
 ENV GIN_MODE=release
 
