@@ -20,6 +20,10 @@ var (
 
 func Init() {
 
+	// Ensure logs directory exists
+	if err := os.MkdirAll("logs", 0755); err != nil {
+		log.Fatal("Failed to create logs directory: ", err)
+	}
 	//log file
 	logFileName := "logs/" + time.Now().Format("2006-01-02") + ".log"
 	file, err := os.OpenFile(logFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
@@ -28,10 +32,9 @@ func Init() {
 	}
 	log.SetOutput(file)
 
-	err = godotenv.Load(".env")
-
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	// Try to load .env, log warning if missing
+	if err := godotenv.Load(".env"); err != nil {
+		log.Println("Warning: .env file not loaded:", err)
 	}
 
 	log.Println(os.Getenv("CONNECTION"))
