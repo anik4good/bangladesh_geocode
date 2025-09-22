@@ -16,4 +16,4 @@ ENV GIN_MODE=release
 
 EXPOSE 1552
 
-CMD ["./bangladesh_geocode"]
+CMD ["sh", "-c", "mkdir -p logs && ./bangladesh_geocode"]

@@ -22,6 +22,14 @@ spec:
       labels:
         io.kompose.service: app
     spec:
+
+      # <-- Add initContainers here
+      initContainers:
+      - name: wait-for-db
+        image: busybox:1.36 # A small, simple image
+        # This command repeatedly tries to connect to the db service on port 3306
+        # It will keep trying until it succeeds, then the init container will exit
+        command: [ 'sh', '-c', 'until nc -z -v -w30 db 3306; do echo "Waiting for database connection..."; sleep 2; done;' ]
       containers:
       - env:
         - name: CONNECTION
@@ -36,6 +44,7 @@ spec:
         ports:
         - containerPort: 1552
           protocol: TCP
+        # workingDir: /app
         volumeMounts:
         - name: logs
           mountPath: /app/logs

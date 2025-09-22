@@ -6,9 +6,9 @@ services:
     environment:
       - CONNECTION=user:password@tcp(db:3306)/bangladesh_geocode?charset=utf8mb4&parseTime=True&loc=Local
       - SERVER_PORT=1552
-      - SERVER_URL=http://localhost:1552
+      # - SERVER_URL=http://localhost:1552
     ports:
-      - "8112:1552"
+      - "8070:1552"
     restart: always
     volumes:
       - logs:/app/logs
@@ -16,14 +16,14 @@ services:
       - db
 
   db:
-    image: mysql:8.0
+    image: mariadb:10.11
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bangladesh_geocode
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - '33061:3306'
+      - '3307:3306'
     volumes:
       - db-data:/var/lib/mysql
 
